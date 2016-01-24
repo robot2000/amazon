@@ -1,8 +1,6 @@
 FactoryGirl.define do
   factory :author do
-    first_name "MyString"
-last_name "MyString"
-biography "MyText"
+    name { Faker::Book.author }
+    biography { Faker::Lorem.paragraph }
   end
-
 end

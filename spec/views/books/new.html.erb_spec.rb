@@ -5,7 +5,7 @@ RSpec.describe "books/new", type: :view do
     assign(:book, Book.new(
       :title => "MyString",
       :description => "MyText",
-      :price => "9.99",
+      :price => "10",
       :in_stock => 1
     ))
   end

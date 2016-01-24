@@ -1,7 +1,6 @@
 FactoryGirl.define do
   factory :rating do
-    review "MyText"
-value 1
+    review { Faker::Lorem.sentence }
+    value { Faker::Number.between(1, 10) }
   end
-
 end

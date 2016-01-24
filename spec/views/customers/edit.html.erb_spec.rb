@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.describe "customers/edit", type: :view do
   before(:each) do
     @customer = assign(:customer, Customer.create!(
-      :email => "MyString",
-      :pasword => "MyString",
-      :firstname => "MyString",
-      :lastname => "MyString"
+      :email => "email@mail.com",
+      :password => "1234567890",
+      :firstname => "John",
+      :lastname => "Doe"
     ))
   end
 
@@ -17,7 +17,7 @@ RSpec.describe "customers/edit", type: :view do
 
       assert_select "input#customer_email[name=?]", "customer[email]"
 
-      assert_select "input#customer_pasword[name=?]", "customer[pasword]"
+      assert_select "input#customer_password[name=?]", "customer[password]"
 
       assert_select "input#customer_firstname[name=?]", "customer[firstname]"
 
