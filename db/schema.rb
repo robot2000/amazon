@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160119132215) do
+ActiveRecord::Schema.define(version: 20160125100205) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "address",    limit: 255
@@ -72,6 +72,20 @@ ActiveRecord::Schema.define(version: 20160119132215) do
     t.datetime "updated_at",             null: false
   end
 
+  create_table "credit_cards", force: :cascade do |t|
+    t.string   "number",           limit: 255
+    t.string   "cvv",              limit: 255
+    t.integer  "expiration_month", limit: 4
+    t.integer  "expiration_year",  limit: 4
+    t.string   "firstname",        limit: 255
+    t.string   "lastname",         limit: 255
+    t.integer  "customer_id",      limit: 4
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "credit_cards", ["customer_id"], name: "index_credit_cards_on_customer_id", using: :btree
+
   create_table "customers", force: :cascade do |t|
     t.string   "email",      limit: 255
     t.string   "password",   limit: 255
@@ -92,4 +106,5 @@ ActiveRecord::Schema.define(version: 20160119132215) do
 
   add_foreign_key "book_authors", "authors"
   add_foreign_key "book_authors", "books"
+  add_foreign_key "credit_cards", "customers"
 end
