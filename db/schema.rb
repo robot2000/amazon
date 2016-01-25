@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160125100205) do
+ActiveRecord::Schema.define(version: 20160125105049) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "address",    limit: 255
@@ -95,6 +95,21 @@ ActiveRecord::Schema.define(version: 20160125100205) do
     t.datetime "updated_at",             null: false
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.float    "total_price",         limit: 24
+    t.date     "completed_date"
+    t.string   "state",               limit: 255
+    t.integer  "customer_id",         limit: 4
+    t.integer  "credit_card_id",      limit: 4
+    t.integer  "billing_address_id",  limit: 4,   null: false
+    t.integer  "shipping_address_id", limit: 4,   null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "orders", ["credit_card_id"], name: "fk_rails_7d2de72b48", using: :btree
+  add_index "orders", ["customer_id"], name: "fk_rails_3dad120da9", using: :btree
+
   create_table "ratings", force: :cascade do |t|
     t.text     "review",      limit: 65535
     t.integer  "value",       limit: 4
@@ -107,4 +122,6 @@ ActiveRecord::Schema.define(version: 20160125100205) do
   add_foreign_key "book_authors", "authors"
   add_foreign_key "book_authors", "books"
   add_foreign_key "credit_cards", "customers"
+  add_foreign_key "orders", "credit_cards"
+  add_foreign_key "orders", "customers"
 end
