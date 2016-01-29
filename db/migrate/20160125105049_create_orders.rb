@@ -1,5 +1,4 @@
 class CreateOrders < ActiveRecord::Migration
-  drop_table :orders
 
   def change
     create_table :orders do |t|
