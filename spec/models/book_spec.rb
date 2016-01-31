@@ -6,13 +6,13 @@ RSpec.describe Book, type: :model do
     it { expect have_db_column :title }
     it { expect have_db_column :description }
     it { expect have_db_column :price }
-    it { expect have_db_column :in_stock }
+    it { expect have_db_column :qty }
   end
 
   context 'validation' do 
     it { expect validate_presence_of :title }
     it { expect validate_presence_of :price }
-    it { expect validate_presence_of :in_stock }
+    it { expect validate_presence_of :qty }
     it { expect validate_numericality_of(:price).is_greater_than_or_equal_to(0.01) }
     it { expect validate_numericality_of(:price).is_greater_than_or_equal_to(1) }
   end

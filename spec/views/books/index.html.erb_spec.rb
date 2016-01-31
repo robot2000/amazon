@@ -7,13 +7,13 @@ RSpec.describe "books/index", type: :view do
         :title => "Title",
         :description => "MyText",
         :price => "10",
-        :in_stock => 1
+        :qty => 1
       ),
       Book.create!(
         :title => "Title",
         :description => "MyText",
         :price => "10",
-        :in_stock => 1
+        :qty => 1
       )
     ])
   end

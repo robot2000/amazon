@@ -6,7 +6,7 @@ RSpec.describe "books/show", type: :view do
       :title => "Title",
       :description => "MyText",
       :price => "10",
-      :in_stock => 1
+      :qty => 1
     ))
   end
 

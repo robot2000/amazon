@@ -6,7 +6,7 @@ RSpec.describe "books/edit", type: :view do
       :title => "MyString",
       :description => "MyText",
       :price => "9.99",
-      :in_stock => 1
+      :qty => 1
     ))
   end
 
@@ -21,7 +21,7 @@ RSpec.describe "books/edit", type: :view do
 
       assert_select "input#book_price[name=?]", "book[price]"
 
-      assert_select "input#book_in_stock[name=?]", "book[in_stock]"
+      assert_select "input#book_qty[name=?]", "book[qty]"
     end
   end
 end
