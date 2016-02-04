@@ -5,7 +5,7 @@ RSpec.describe BookAuthor, type: :model do
 
   context 'attributes' do
     requaired_fields.each do |att|
-      it { expect respond_to(att) }
+      it { should respond_to(att) }
     end
   end
 end

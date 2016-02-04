@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :customers
+  devise_for :users
   resources :authors
   resources :books
 end

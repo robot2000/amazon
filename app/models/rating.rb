@@ -1,6 +1,6 @@
 class Rating < ActiveRecord::Base
   belongs_to :book
-  belongs_to :customer
+  belongs_to :user
 
   validates :value, numericality: { 
     only_integer: true,

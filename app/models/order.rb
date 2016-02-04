@@ -1,6 +1,6 @@
 class Order < ActiveRecord::Base
   
-  belongs_to :customer
+  belongs_to :user
   belongs_to :credit_card
   has_many   :order_items
   belongs_to :billing_address, class_name: 'Address'

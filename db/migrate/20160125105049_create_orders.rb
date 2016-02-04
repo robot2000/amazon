@@ -6,8 +6,8 @@ class CreateOrders < ActiveRecord::Migration
       t.date :completed_date
       t.string :state
       
-      t.references :customer, foreign_key: true
-      t.references :credit_card, foreign_key: true
+      t.references :user, index: true
+      t.references :credit_card, index: true
       t.references :billing_address, null: false
       t.references :shipping_address, null: false
       

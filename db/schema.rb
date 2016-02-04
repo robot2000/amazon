@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160131141205) do
+ActiveRecord::Schema.define(version: 20160204180847) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "address",    limit: 255
@@ -45,10 +45,10 @@ ActiveRecord::Schema.define(version: 20160131141205) do
   create_table "books", force: :cascade do |t|
     t.string   "title",       limit: 255
     t.text     "description", limit: 65535
-    t.decimal  "price",                     precision: 10
+    t.decimal  "price",                     precision: 8, scale: 2
     t.integer  "qty",         limit: 4
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
   end
 
   create_table "categories", force: :cascade do |t|
@@ -79,27 +79,30 @@ ActiveRecord::Schema.define(version: 20160131141205) do
     t.integer  "expiration_year",  limit: 4
     t.string   "firstname",        limit: 255
     t.string   "lastname",         limit: 255
-    t.integer  "customer_id",      limit: 4
+    t.integer  "user_id",          limit: 4
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
   end
 
-  add_index "credit_cards", ["customer_id"], name: "index_credit_cards_on_customer_id", using: :btree
+  add_index "credit_cards", ["user_id"], name: "index_credit_cards_on_user_id", using: :btree
 
-  create_table "customers", force: :cascade do |t|
-    t.string   "email",      limit: 255
-    t.string   "password",   limit: 255
-    t.string   "firstname",  limit: 255
-    t.string   "lastname",   limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+  create_table "order_items", force: :cascade do |t|
+    t.decimal  "price",                precision: 8, scale: 2
+    t.integer  "quantity",   limit: 4
+    t.integer  "book_id",    limit: 4
+    t.integer  "order_id",   limit: 4
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
   end
+
+  add_index "order_items", ["book_id"], name: "index_order_items_on_book_id", using: :btree
+  add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
 
   create_table "orders", force: :cascade do |t|
     t.float    "total_price",         limit: 24
     t.date     "completed_date"
     t.string   "state",               limit: 255
-    t.integer  "customer_id",         limit: 4
+    t.integer  "user_id",             limit: 4
     t.integer  "credit_card_id",      limit: 4
     t.integer  "billing_address_id",  limit: 4,   null: false
     t.integer  "shipping_address_id", limit: 4,   null: false
@@ -107,21 +110,38 @@ ActiveRecord::Schema.define(version: 20160131141205) do
     t.datetime "updated_at",                      null: false
   end
 
-  add_index "orders", ["credit_card_id"], name: "fk_rails_7d2de72b48", using: :btree
-  add_index "orders", ["customer_id"], name: "fk_rails_3dad120da9", using: :btree
+  add_index "orders", ["credit_card_id"], name: "index_orders_on_credit_card_id", using: :btree
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "ratings", force: :cascade do |t|
-    t.text     "review",      limit: 65535
-    t.integer  "value",       limit: 4
-    t.integer  "book_id",     limit: 4,     null: false
-    t.integer  "customer_id", limit: 4,     null: false
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.text     "review",     limit: 65535
+    t.integer  "value",      limit: 4
+    t.integer  "book_id",    limit: 4,     null: false
+    t.integer  "user_id",    limit: 4,     null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                  limit: 255, default: "", null: false
+    t.string   "encrypted_password",     limit: 255, default: "", null: false
+    t.string   "reset_password_token",   limit: 255
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
+    t.string   "firstname",              limit: 255
+    t.string   "lastname",               limit: 255
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "book_authors", "authors"
   add_foreign_key "book_authors", "books"
-  add_foreign_key "credit_cards", "customers"
-  add_foreign_key "orders", "credit_cards"
-  add_foreign_key "orders", "customers"
 end

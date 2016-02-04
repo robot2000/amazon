@@ -5,8 +5,8 @@ RSpec.describe Address, type: :model do
 
   context 'attributes' do
     requaired_fields.each do |att|
-      it { expect respond_to(att) }
-      it { expect have_db_column(att) }
+      it { should respond_to(att) }
+      it { should have_db_column(att) }
     end
   end
 
@@ -16,7 +16,7 @@ RSpec.describe Address, type: :model do
     end
 
     requaired_fields.each do |att|
-      it { expect validate_presence_of(att) }
+      it { should validate_presence_of(att) }
     end
   end
 end

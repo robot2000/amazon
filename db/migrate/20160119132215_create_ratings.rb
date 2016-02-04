@@ -5,7 +5,7 @@ class CreateRatings < ActiveRecord::Migration
       t.integer :value
 
       t.references :book,   null: false
-      t.references :customer, null: false
+      t.references :user, null: false
 
       t.timestamps null: false
     end
