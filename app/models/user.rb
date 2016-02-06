@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   has_many :orders
   has_many :ratings
 
-  validates :email, :encrypted_password, :firstname, :lastname, presence: true
+  validates :email, :password, :firstname, :lastname, presence: true
   validates :email, uniqueness: true
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
 

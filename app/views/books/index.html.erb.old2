@@ -1,0 +1,48 @@
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-md-9">
+
+      <div class="row">
+        <% @books.each do |book| %>
+          <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="thumbnail">
+              <img src="/assets/images/book.jpg" alt="">
+              <div class="caption">
+
+                <h4 class="pull-right">
+                  $<%= book.price %>
+                </h4>
+
+                <h4 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                  <%= link_to book.title, book %>
+                </h4>
+
+                <% if !book.author.nil? %>
+                  <span class="label label-primary">
+                    <%= link_to %Q(#{book.author.name}), author_path(book.author), class: 'author' %>
+                  </span>
+                <% end %>
+
+                <p> <%= book.description %> </p>
+              </div>
+              <div class="ratings">
+                <p class="pull-right"><%= book.ratings.count %> reviews</p>
+                <p>
+                  <% 5.times do |n| %>
+                    <% if !book.ratings.average(:value).nil? && book.ratings.average(:value).ceil > n %>
+                      <span class="glyphicon glyphicon-star"></span>
+                      <% else %>
+                      <span class="glyphicon glyphicon-star-empty"></span>
+                    <% end %>
+                  <% end %>
+                </p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -21,7 +21,7 @@ gem 'devise'
 gem 'haml'
 gem 'capybara'
 gem 'rails_admin'
-gem 'cancan'
+gem 'cancancan', '~> 1.10'
 gem 'mini_magick'
 gem 'carrierwave'
 
