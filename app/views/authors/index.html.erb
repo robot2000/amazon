@@ -1,24 +1,26 @@
-<p id="notice"><%= notice %></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Biography</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @authors.each do |author| %>
-      <tr>
-        <td><%= author.name %></td>
-        <td><%= author.biography %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Author', new_author_path %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12" style="margin-top: 50px;">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Books count</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @authors.each do |author| %>
+            <tr>
+              <td>
+                <h4><%= link_to %Q(#{author.name}), author %></h4>
+              </td>
+              <td>
+                <h4><%= author.books.count %></h4>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

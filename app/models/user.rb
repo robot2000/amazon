@@ -1,6 +1,11 @@
 class User < ActiveRecord::Base
   has_many :orders
   has_many :ratings
+  has_many :orders, dependent: :destroy
+  has_one  :credit_card, dependent: :destroy
+
+  # has_one  :shipping_address, dependent: :destroy
+  # has_one  :billing_address,  dependent: :destroy
 
   validates :email, :password, :firstname, :lastname, presence: true
   validates :email, uniqueness: true
