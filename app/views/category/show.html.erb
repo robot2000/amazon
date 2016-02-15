@@ -7,13 +7,13 @@
       <table class="table">
         <thead>
           <tr>
-            <th>Title</th>
+            <th>Name of book</th>
             <th>Price</th>
           </tr>
         </thead>
 
         <tbody>
-          <% @books.each do |book| %>
+          <% @category.books.each do |book| %>
             <tr>
               <td><%= link_to book.title, book %></td>
               <td><%= book.price %></td>
@@ -21,6 +21,8 @@
           <% end %>
         </tbody>
       </table>
+      <%= link_to 'Back', category_index_path %>
     </div>
   </div>
 </div>
+

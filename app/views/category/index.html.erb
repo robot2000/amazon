@@ -1,1 +1,8 @@
-<%= @categories %>
+<div class="col-md-3" style="margin-top: 50px;">
+    <p class="lead"><%= t('category') %></p>
+    <div class="list-group">
+      <% @categories.each do |category| %>
+        <%= link_to category.title, category, class: "list-group-item" %></a>
+      <% end %>
+    </div>
+</div>

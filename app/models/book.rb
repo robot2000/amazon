@@ -5,7 +5,7 @@ class Book < ActiveRecord::Base
   has_many :category_books
   has_many :categories, through: :category_books
 
-  has_many :rating
+  has_many :ratings, dependent: :destroy
 
   validates :title, :price, :qty, presence: true
   validates :price, numericality: { greater_than: 0 }

@@ -1,24 +1,67 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @book.title %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @book.description %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @book.price %>
-</p>
-
-<p>
-  <strong>Qty:</strong>
-  <%= @book.qty %>
-</p>
-
-<%= link_to 'Edit', edit_book_path(@book) %> |
-<%= link_to 'Back', books_path %>
+<div class="container books">
+  <div class="row">
+    <div class="col-md-12" style="margin-top: 50px;">
+      <p id="notice"><%= notice %></p>
+      <p>
+        <strong>Title:</strong>
+        <%= @book.title %>
+      </p>
+      <p>
+        <strong>Description:</strong>
+        <%= @book.description %>
+      </p>
+      <p>
+        <strong>Authors:</strong>
+        <% @book.authors.each do |author| %>
+          <%= link_to author.name, author %>
+        <% end %>
+        <!--<%= @book.authors.pluck(:name).join(", ") %> /-->
+      </p>
+      <p>
+        <strong>Price:</strong>
+        <%= @book.price %>
+      </p>
+      <div class="ratings">
+        <p class="pull-right">
+          <%= @book.ratings.count %>
+          reviews
+        </p>
+        <p>
+          <% 5.times do |item| %>
+            <% if @book.ratings.average(:value).nil? %>
+              Not a rating
+              <% break %>
+            <% elsif @book.ratings.average(:value).ceil > item %>
+              <span class="glyphicon glyphicon-star"></span>
+            <% else %>
+              <span class="glyphicon glyphicon-star-empty"></span>
+            <% end %>
+          <% end %>
+          <%= number_with_precision(@book.ratings.average(:value), precision: 2) %>
+        </p>
+      </div>
+      <%= link_to 'Leave a review', new_book_rating_path(@book), class: 'btn btn-info' %>
+      
+      <% @book.ratings.each do |rating| %>
+        <div class="row">
+          <br/>
+          <div class="col-md-12">
+            <p>
+              <span class="date">
+                <%= rating.updated_at.strftime("%B %d, %Y") %>
+              </span>
+            </p>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <p>
+            <%= rating.review %>
+          </p>
+        </div>
+      <% end %>
+      <p>
+        <%= link_to 'Back', books_path %>
+      </p>
+    </div>
+  </div>
+</div>

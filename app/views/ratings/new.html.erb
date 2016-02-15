@@ -1,0 +1,29 @@
+<div class="container reviews">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>
+        New Review for
+        <%= link_to "#{@book.title}", book_path(@book) %>
+      </h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <%= form_for([@book, @rating]) do |f| %>
+       <div class="form-group">
+        <%= f.label :value %>
+        <br/>
+        <%= f.select :value, (1..10), {}, :class => 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :review %>
+        <br/>
+        <%= f.text_area :review, :class => 'form-control' %>
+      </div>
+      <div class="actions">
+        <%= f.submit 'Leave a review', :class => 'btn btn-default' %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
