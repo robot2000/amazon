@@ -19,12 +19,12 @@ div class="row">
       <div class="form-group">
         <%= f.label :value %>
         <br/>
-        <%= f.select :value, (1..5), {}, :class => 'form-control' %>
+        <%= f.select :value, (1..10), {}, :class => 'form-control' %>
       </div>
       <div class="form-group">
-        <%= f.label :review_text %>
+        <%= f.label :review %>
         <br/>
-        <%= f.text_area :review_text, :class => 'form-control' %>
+        <%= f.text_area :review, :class => 'form-control' %>
       </div>
       <div class="actions">
         <%= f.submit 'Leave a review', :class => 'btn btn-default' %>
