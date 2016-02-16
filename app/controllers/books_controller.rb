@@ -3,6 +3,15 @@ class BooksController < ApplicationController
 
   def index
     @books = Book.all
+    @categories = Category.all
+
+  #   @category = Category.find(params[:category]) if params[:category]
+  #   if @category
+  #     @books = Book.where(category: @category.id)
+  #   else
+  #     @books = Book.all
+  #   end
+  # #   @categories = Category.all
   end
 
   def show
@@ -38,7 +47,7 @@ class BooksController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def book_params
-      params.require(:book).permit(:title, :description, :price, :qty)
-    end
+    # def book_params
+    #   params.require(:book).permit(:title, :description, :price, :qty)
+    # end
 end

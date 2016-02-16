@@ -1,28 +1,10 @@
-<p id="notice"><%= notice %></p>
-
-<div class="container">
+<div class="container" style="margin-top: 50px;">
   <div class="row">
-    
-    <div class="col-md-12" style="margin-top: 50px;">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Name of book</th>
-            <th>Price</th>
-          </tr>
-        </thead>
+    <div class="col-md-9">
 
-        <tbody>
-          <% @category.books.each do |book| %>
-            <tr>
-              <td><%= link_to book.title, book %></td>
-              <td><%= book.price %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-      <%= link_to 'Back', category_index_path %>
+        <%= render @books %>
+      
     </div>
   </div>
+  <%= link_to 'Back', books_path %>
 </div>
-

@@ -4,6 +4,8 @@ class CategoryController < ApplicationController
 
   def show
     @category = Category.find(params[:id])
+    #@books = Book.where(category: @category.id)
+    @books = @category.books
   end
 
   def index

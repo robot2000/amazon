@@ -16,4 +16,5 @@ Rails.application.routes.draw do
   # get "/ratings/new" => "ratings#new" 
   # resources :rating, only: :new
 
+  
 end
