@@ -3,6 +3,18 @@
     <div class="col-md-9">
       <%= render @books %>
     </div>
+    <div class="col-md-3">
+      <div class="row">
+        <strong>
+          Shop By Categories
+        </strong>
+      </div>
+      <% @categories.each do |category| %>
+        <div class="row">
+          <h4><%= link_to "#{category.title}", category %></h4>
+        </div>
+      <% end %>
+    </div>
   </div>
   <p>
     <h4><%= link_to 'Back', books_path %></h4>

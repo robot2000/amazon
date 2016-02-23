@@ -3,9 +3,9 @@ class CategoryController < ApplicationController
   before_action :define_category, only: [:show]
 
   def show
-    @category = Category.find(params[:id])
-    #@books = Book.where(category: @category.id)
+    @categories = Category.all
     @books = @category.books
+    # @category = Category.find(params[:id])
   end
 
   def index
