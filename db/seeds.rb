@@ -20,13 +20,12 @@ def generate_users(n)
     user = User.new(email: Faker::Internet.email, password: '12345678', firstname: Faker::Name.first_name, lastname: Faker::Name.last_name)
     user.save!
   end
-  User.create(email: 'admin@admin.com', password: 'admin', firstname: 'admin', lastname: 'admin', admin: true)
+  User.create!(email: 'admin@admin.com', password: 'adminadmin', firstname: 'admin', lastname: 'admin', admin: true)
 end
 
 def generate_books(n)
   n.times do 
-    book = Book.new(title: Faker::Book.title, description: Faker::Hipster.paragraph, price: Faker::Commerce.price, qty: Faker::Number.between(1, 10))
-    book.save!
+    Book.create!(title: Faker::Book.title, description: Faker::Hipster.paragraph, price: Faker::Commerce.price, qty: Faker::Number.between(1, 10))
   end
 end
 

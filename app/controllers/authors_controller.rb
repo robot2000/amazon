@@ -6,6 +6,7 @@ class AuthorsController < ApplicationController
   end
 
   def show
+    @books = @author.books.page(params[:page]).per(12)
   end
 
   def new

@@ -2,7 +2,7 @@ class BooksController < ApplicationController
   before_action :set_book, only: [:show, :destroy]
 
   def index
-    @books = Book.all
+    @books = Book.all.page(params[:page]).per(12)
     @categories = Category.all
 
   #   @category = Category.find(params[:category]) if params[:category]

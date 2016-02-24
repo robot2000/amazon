@@ -1,29 +1,15 @@
 <div class="container">
   <div class="row">
-  
     <div class="col-md-9" style="margin-top: 50px;">
-      <div class="row">
-        <% @author.books.each do |book| %>
-          <div class="col-sm-4 col-lg-4 col-md-4">
-            <div class="thumbnail">
-              <div class="caption">
-                <h4 class="pull-right">
-                  $<%= book.price %>
-                </h4>
-                <h4 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                  <%= link_to book.title, book %>
-                </h4>
-                <p>
-                  <%= book.description %>
-                </p>
-              </div>
-              <div class="ratings">
-                  
-              </div>
-            </div>
-          </div>
-        <% end %>
-      </div>
+      <%= render @books %>
     </div>
+  </div>
+  <p>
+    <h4>
+      <%= link_to 'Back', authors_path %>
+    </h4>
+  </p>
+  <div class="text-center">
+    <%= paginate @books %>
   </div>
 </div>
