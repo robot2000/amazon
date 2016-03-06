@@ -15,6 +15,8 @@ class BooksController < ApplicationController
   end
 
   def show
+    book = Book.find(params[:id])
+    @order_item = OrderItem.new
   end
 
 

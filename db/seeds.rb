@@ -17,8 +17,7 @@ end
 
 def generate_users(n)
   n.times do
-    user = User.new(email: Faker::Internet.email, password: '12345678', firstname: Faker::Name.first_name, lastname: Faker::Name.last_name)
-    user.save!
+    User.create!(email: Faker::Internet.email, password: '12345678', firstname: Faker::Name.first_name, lastname: Faker::Name.last_name)
   end
   User.create!(email: 'admin@admin.com', password: 'adminadmin', firstname: 'admin', lastname: 'admin', admin: true)
 end
@@ -32,7 +31,7 @@ end
 def generate_authors(n)
   n.times do
     author = Author.new(name: Faker::Name.name, biography: Faker::Lorem.paragraph(2))
-    rand(1..5).times do
+    rand(1..4).times do
       author.books << Book.find(rand(Book.ids.sort.first..Book.ids.sort.last))
     end
     author.save!

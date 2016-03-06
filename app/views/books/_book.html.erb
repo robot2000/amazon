@@ -1,9 +1,11 @@
 <div class="col-md-4">
   <%= link_to image_tag('book.jpg'), book_path(book) %>
   <div class="title">
-    <%= link_to( "#{book.title}", book_path(book)) %>
+    <%= link_to( book.title, book_path(book)) %>
   </div>
   <div class="price">
-    <%= "#{book.price}" %>
+    <strong>
+      <%= number_to_currency(book.price) %>
+    </strong>
   </div>
 </div>

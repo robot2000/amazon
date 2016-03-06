@@ -21,15 +21,20 @@
         <!--<%= @book.authors.pluck(:name).join(", ") %> /-->
       </p>
       <p>
-        <strong>Price:</strong>
-        <%= @book.price %>
+        <h3>
+          <%= number_to_currency(@book.price) %>
+        </h4>
       </p>
+      
       <p>
-        <div class="form-group integer required one-line">
-          <%= number_field_tag :qty, '1', class: 'form-control one-line', min: '1', max: '20' %>
-          <%= submit_tag 'Add to cart', class: 'btn btn-default btn btn-primary' %>
-        </div>
+        <%= form_for @order_item do |f| %>
+         
+          <%= f.number_field :quantity, min: 1, max: 5, value: 1, class: 'input-mini' %>
+          <%= f.hidden_field :book_id, value: @book.id %>
+          <%= f.submit 'Add to cart', class: 'btn btn-default btn btn-primary' %>
+        <% end %>
       </p>
+      
       <div class="ratings">
         <p class="pull-right">
           <%= @book.ratings.count %>

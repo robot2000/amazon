@@ -18,6 +18,8 @@ gem 'kaminari'
 gem 'bootstrap-sass', '~> 3.3.6'
 
 gem 'devise'
+gem 'omniauth'
+gem 'omniauth-facebook'
 gem 'haml'
 gem 'capybara'
 gem 'rails_admin'
