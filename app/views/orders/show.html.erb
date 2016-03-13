@@ -1,10 +1,22 @@
-<% if notice %>
-<p id="notice"><%= notice %></p>
-<% end %>
-
-<h2>Your Order</h2>
-<ul>    
-  <% @order.order_items.each do |item| %>
-    <li><%= item.book.title %></li>
+<div class="container" style="margin-top: 50px;">
+  <% if notice %>
+    <p id="notice"><%= notice %></p>
   <% end %>
-</ul>
+
+  <h2>Your Order</h2>
+  <ul>   
+    <% @order.order_items.each do |order_item| %>
+      <li><%= order_item.quantity %> &times; <%= order_item.book.title %> &times; <%= order_item.total_price  %></li>
+    <% end %>
+  </ul>
+
+
+  <div class="row">
+    <div class="col-xs-2">
+      <%= button_to 'Empty cart', @order, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-default btn btn-primary' %>
+    </div>
+    <div class="col-xs-6">
+      <%= link_to 'Continue shopping', root_path, class: 'btn btn-primary' %>
+    </div>
+  </div>
+</div>

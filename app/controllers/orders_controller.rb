@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
-  #before_action :authenticate_user!
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_order
+  # before_action :authenticate_user!
 
   def index
     if user_signed_in?
@@ -44,9 +45,11 @@ class OrdersController < ApplicationController
   end
 
   def destroy
-    @order.destroy
-    respond_to do |format|
-      format.html { redirect_to order_url }
+    @order.destroy if @order.id == session[:order_id]
+      session[:order_id] = nil
+      respond_to do |format|
+      format.html { redirect_to root_path,
+        notice: 'Your cart is currently empty' }
       format.json { head :no_content }
     end
   end
@@ -60,5 +63,9 @@ class OrdersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
       params[:order]
+    end
+    def invalid_order
+      logger.error "Attempt to access invalid order #{params[:id]}"
+      redirect_to root_url, notice: 'Invalid order'
     end
 end

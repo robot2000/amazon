@@ -1,7 +1,9 @@
 <div class="container">
   <div class="row">
     <div class="col-md-9" style="margin-top: 50px;">
-      <p id="notice"><%= notice %></p>
+      <% if notice %>
+        <p id="notice"><%= notice %></p>
+      <% end %>
       <p>
         <%= image_tag(@book.image) %>
       </p>
@@ -28,7 +30,6 @@
       
       <p>
         <%= form_for @order_item do |f| %>
-         
           <%= f.number_field :quantity, min: 1, max: 5, value: 1, class: 'input-mini' %>
           <%= f.hidden_field :book_id, value: @book.id %>
           <%= f.submit 'Add to cart', class: 'btn btn-default btn btn-primary' %>

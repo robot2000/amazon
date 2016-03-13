@@ -20,25 +20,32 @@ class OrderItemsController < ApplicationController
   def edit
   end
 
+
   def create
-
-    book = Book.find(params[:order_item][:book_id])
-    @order_item = @order.order_items.build(book: book, price: book.price, quantity: params[:order_item][:quantity]  )
-    # @order_item = @order.add_book(book.id)
-
-    respond_to do |format|
-      if @order_item.save
-        format.html { redirect_to @order_item.order,
-          notice: 'Order item was successfully created.' }
-        format.json { render action: 'show',
-          status: :created, location: @order_item }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @order_item.errors,
-          status: :unprocessable_entity }
-      end
-    end
+    @order.add_book(params[:order_item][:book_id], params[:order_item][:quantity].to_i)
+    redirect_to :back
   end
+
+  
+  # def create
+
+  #   book = Book.find(params[:order_item][:book_id])
+  #   # @order_item = @order.order_items.build(book: book, price: book.price, quantity: params[:order_item][:quantity])
+  #   @order_item = @order.add_book(book.id)
+
+  #   respond_to do |format|
+  #     if @order_item.save
+  #       format.html { redirect_to @order_item.order,
+  #         notice: 'Order item was successfully created.' }
+  #       format.json { render action: 'show',
+  #         status: :created, location: @order_item }
+  #     else
+  #       format.html { render action: 'new' }
+  #       format.json { render json: @order_item.errors,
+  #         status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   def update
     respond_to do |format|
@@ -68,6 +75,6 @@ class OrderItemsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def order_item_params
-    params.require(:order_item).permit(:book_id, :order_id, :price, :quantity)
+    params.require(:order_item).permit(:book_id, :price, :quantity)
   end
 end

@@ -32,7 +32,10 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <%= link_to 'Cart', books_path %>
+              <%= link_to(orders_path) do %>
+                <span class="glyphicon glyphicon-shopping-cart"></span>
+                <%= "Cart: (#{ session[:order].nil? ? "EMPTY" : session[:order].order_item.inject(0){|sum, x| sum + x} })" %>
+              <% end %>
             </li>
             <% if signed_in? %>
               <li>
@@ -50,6 +53,11 @@
               </li>
               <li>
                 <%= link_to 'Sign in', user_session_path %>
+              </li>
+              <li>
+                <%= link_to(user_omniauth_authorize_path(:facebook)) do %>
+                  <span class="fa fa-facebook-official"></span>
+                <% end %>
               </li>
             <% end %>
           </ul>

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  root 'home#index'
+  root 'home#index' #, as: 'home'
   
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   
@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   # get "/ratings/new" => "ratings#new" 
   # resources :rating, only: :new
   
-  resources :orders, only: [:index, :show, :update]
+  resources :orders, only: [:index, :show, :update, :destroy]
 
   resources :order_items, except: [:new, :show, :edit]
 end
