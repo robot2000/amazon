@@ -48,22 +48,15 @@ class OrderItemsController < ApplicationController
   # end
 
   def update
-    respond_to do |format|
-      if @order_item.update(order_item_params)
-        format.html { redirect_to @order_item, notice: 'Order item was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @order_item.errors, status: :unprocessable_entity }
-      end
-    end
+    @order_item.update(order_item_params)
+    render nothing: true
   end
 
   def destroy
     @order_item.destroy
     respond_to do |format|
-      format.html { redirect_to order_items_url }
-      format.json { head :no_content }
+      format.html { redirect_to :back, :notice => 'Item has been removed from your cart.' }
+      format.json { head :ok }
     end
   end
 

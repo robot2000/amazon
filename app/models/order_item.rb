@@ -5,6 +5,6 @@ class OrderItem < ActiveRecord::Base
   validates :price, :quantity, presence: true
 
   def total_price
-    price * quantity
+    book.price * quantity
   end
 end

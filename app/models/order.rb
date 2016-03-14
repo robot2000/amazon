@@ -28,6 +28,10 @@ class Order < ActiveRecord::Base
     order_item.save
   end
 
+  def total_price
+    order_items.to_a.sum { |item| item.total_price }
+  end
+
 
   # def add_book(book_id)
 
